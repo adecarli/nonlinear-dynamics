@@ -1,8 +1,8 @@
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 function setup() {
-    canvas.width = 800;
-    canvas.height = 600;
+    canvas.width = 400;
+    canvas.height = 300;
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
@@ -34,7 +34,7 @@ function draw(ctx, angle) {
     
     ctx.beginPath();
     ctx.arc(100*Math.cos(angle), 100*Math.sin(angle), 5, 0, 2*Math.PI);
-    ctx.fillStyle = "rgba(200, 200, 255, 0.05)";
+    ctx.fillStyle = "rgba(200, 200, 255, 0.5)";
     ctx.fill();
     ctx.closePath();
     
@@ -59,12 +59,15 @@ function energy(x) {
 
 // System parameters
 // Chaotic behavior: b = 0.05, A = 0.6, w = 0.7
+// Damped oscilation: b = 0.5, A = 0
+// Critically damped oscilation: b = 10, A = 0
 let b = 0;
 let A = 0;
 let w = 0;
 // System Initial conditions
-let Energy = 1;
-let x = [0, Math.sqrt(2*Energy)];
+// let Energy = 1;
+let x = [0.7, 0];
+let Energy = energy(x);
 let nextX = [0, 0];
 let functions = [funcX1, funcX2];
 let t = 0;
@@ -108,9 +111,6 @@ function animate() {
     
 }
 
-
 setup();
-//setInterval(animate, 1);
 animate();
 
-//draw(ctx, x[0]);
